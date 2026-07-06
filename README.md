@@ -32,7 +32,7 @@ Claude Code supports a native "statusline" feature — a script that receives se
 1. Clone this repo or just download `statusline.ps1`.
 
    ```powershell
-   git clone https://github.com/waine-r/claude-token-statusline-.git
+   git clone https://github.com/waine-r/claude-token-statusline.git
    ```
 
 2. Copy `statusline.ps1` into your Claude Code config folder:
