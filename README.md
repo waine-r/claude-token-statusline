@@ -1,5 +1,7 @@
 # claude-token-statusline
 
+**English** · [Português](./README.pt-BR.md)
+
 A simple, native **statusline** for [Claude Code](https://code.claude.com) on Windows (PowerShell) that shows your token usage, context window %, estimated cost, and your **plan usage limits** (5-hour session and weekly windows) right below the input box — no browser extensions, no external services, no API keys, 100% local.
 
 ```
