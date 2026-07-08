@@ -5,10 +5,12 @@
 A simple, native **statusline** for [Claude Code](https://code.claude.com) on Windows (PowerShell) that shows your token usage, context window %, estimated cost, and your **plan usage limits** (5-hour session and weekly windows) right below the input box — no browser extensions, no external services, no API keys, 100% local.
 
 ```
-[Sonnet] ##-------- 25% | tokens in:15000 out:3000 | custo: $0.12
+[Sonnet] ██░░░░░░░░ ctx 25% | tokens 15k↑ 3k↓ | $0.12
 Plano | sessao 5h: 4% (reinicia 17:40) | semana: 20% (reinicia qui 13:00)
 ```
 
+> The context bar is **color-coded**: green (< 70%), yellow (70–89%), red (≥ 90%). Token counts are shortened (`15k`, `1.3M`) with `↑` = input and `↓` = output.
+>
 > The second line mirrors the "plan usage limits" shown in the Claude desktop app. It only appears for Claude.ai **Pro/Max** subscribers, and only after the first API response in the session.
 
 ## Why
@@ -18,10 +20,10 @@ Claude Code supports a native "statusline" feature — a script that receives se
 ## What it shows
 
 - Current model in use
-- A 10-character progress bar of context window usage
-- Context window usage percentage
-- Input / output token counts
-- Estimated session cost in USD
+- A 10-character **color-coded** progress bar of context window usage (green / yellow / red)
+- Context window usage percentage (labeled `ctx`)
+- Input / output token counts, shortened for readability (`15k`, `1.3M`; `↑` input, `↓` output)
+- Estimated session cost in USD (with `.` decimal separator, locale-independent)
 - Plan usage limits: 5-hour session window and weekly window, each with % used and reset time (Pro/Max only)
 
 ## Requirements
@@ -64,10 +66,10 @@ Claude Code supports a native "statusline" feature — a script that receives se
    '{"model":{"display_name":"Sonnet"},"context_window":{"used_percentage":25,"total_input_tokens":15000,"total_output_tokens":3000},"cost":{"total_cost_usd":0.12},"rate_limits":{"five_hour":{"used_percentage":4,"resets_at":1783370400},"seven_day":{"used_percentage":20,"resets_at":1783612800}}}' | .\statusline.ps1
    ```
 
-   Expected output (the second line is omitted automatically if `rate_limits` is absent):
+   Expected output (the second line is omitted automatically if `rate_limits` is absent; in a real terminal the bar is colored):
 
    ```
-   [Sonnet] ##-------- 25% | tokens in:15000 out:3000 | custo: $0.12
+   [Sonnet] ██░░░░░░░░ ctx 25% | tokens 15k↑ 3k↓ | $0.12
    Plano | sessao 5h: 4% (reinicia 17:40) | semana: 20% (reinicia qui 13:00)
    ```
 

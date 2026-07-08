@@ -5,10 +5,12 @@
 Uma **statusline** nativa e simples para o [Claude Code](https://code.claude.com) no Windows (PowerShell) que mostra seu uso de tokens, a % do context window, o custo estimado e os **limites de uso do plano** (janela de sessão de 5h e janela semanal) logo abaixo da caixa de entrada — sem extensões de navegador, sem serviços externos, sem chaves de API, 100% local.
 
 ```
-[Sonnet] ##-------- 25% | tokens in:15000 out:3000 | custo: $0.12
+[Sonnet] ██░░░░░░░░ ctx 25% | tokens 15k↑ 3k↓ | $0.12
 Plano | sessao 5h: 4% (reinicia 17:40) | semana: 20% (reinicia qui 13:00)
 ```
 
+> A barra de contexto tem **cor**: verde (< 70%), amarelo (70–89%) e vermelho (≥ 90%). As contagens de tokens são abreviadas (`15k`, `1.3M`), com `↑` = entrada e `↓` = saída.
+>
 > A segunda linha espelha os "limites de uso do plano" mostrados no app do Claude para desktop. Ela só aparece para assinantes **Pro/Max** do Claude.ai e apenas depois da primeira resposta da API na sessão.
 
 ## Por quê
@@ -18,10 +20,10 @@ O Claude Code tem um recurso nativo de "statusline" — um script que recebe os 
 ## O que ele mostra
 
 - Modelo em uso no momento
-- Uma barra de progresso de 10 caracteres do uso do context window
-- Percentual de uso do context window
-- Contagem de tokens de entrada / saída
-- Custo estimado da sessão em USD
+- Uma barra de progresso de 10 caracteres do uso do context window, **colorida** (verde / amarelo / vermelho)
+- Percentual de uso do context window (com o rótulo `ctx`)
+- Contagem de tokens de entrada / saída, abreviada para leitura rápida (`15k`, `1.3M`; `↑` entrada, `↓` saída)
+- Custo estimado da sessão em USD (com `.` como separador decimal, independente do locale)
 - Limites de uso do plano: janela de sessão de 5h e janela semanal, cada uma com % usado e horário de reset (somente Pro/Max)
 
 ## Requisitos
@@ -64,10 +66,10 @@ O Claude Code tem um recurso nativo de "statusline" — um script que recebe os 
    '{"model":{"display_name":"Sonnet"},"context_window":{"used_percentage":25,"total_input_tokens":15000,"total_output_tokens":3000},"cost":{"total_cost_usd":0.12},"rate_limits":{"five_hour":{"used_percentage":4,"resets_at":1783370400},"seven_day":{"used_percentage":20,"resets_at":1783612800}}}' | .\statusline.ps1
    ```
 
-   Saída esperada (a segunda linha é omitida automaticamente se `rate_limits` não estiver presente):
+   Saída esperada (a segunda linha é omitida automaticamente se `rate_limits` não estiver presente; num terminal real a barra aparece colorida):
 
    ```
-   [Sonnet] ##-------- 25% | tokens in:15000 out:3000 | custo: $0.12
+   [Sonnet] ██░░░░░░░░ ctx 25% | tokens 15k↑ 3k↓ | $0.12
    Plano | sessao 5h: 4% (reinicia 17:40) | semana: 20% (reinicia qui 13:00)
    ```
 
